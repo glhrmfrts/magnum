@@ -41,6 +41,7 @@ set(MagnumTrade_GracefulAssert_SRCS
     AnimationData.cpp
     CameraData.cpp
     ImageData.cpp
+    MeshData.cpp
     ObjectData2D.cpp
     ObjectData3D.cpp
     PhongMaterialData.cpp)
@@ -53,6 +54,7 @@ set(MagnumTrade_HEADERS
     CameraData.h
     ImageData.h
     LightData.h
+    MeshData.h
     MeshData2D.h
     MeshData3D.h
     MeshObjectData2D.h
