@@ -415,7 +415,7 @@ class MAGNUM_TRADE_EXPORT AnimationData {
          * @ref release() and manage its lifetime yourself.
          */
         template<class V, class R = Animation::ResultOf<V>> const Animation::TrackView<Float, V, R>& track(UnsignedInt id) const;
-
+#error todo ability to get a track in a full type (i.e., expanding encoded quats to full)
         /**
          * @brief Release data storage
          *
@@ -424,7 +424,7 @@ class MAGNUM_TRADE_EXPORT AnimationData {
          * @see @ref data()
          */
         Containers::Array<char> release() { return std::move(_data); }
-
+#error this needs to delete tracks too so it's possible to distinguish between moved-out and mmaped state (both have null data) also document it's then equiv to moved.out state
         /**
          * @brief Importer-specific state
          *

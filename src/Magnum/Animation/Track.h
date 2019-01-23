@@ -315,7 +315,7 @@ template<class K, class V, class R
         Containers::StridedArrayView<const V> values() const {
             return _data ? Containers::StridedArrayView<const V>{&_data[0].second, _data.size(), sizeof(std::pair<K, V>)} : nullptr;
         }
-
+#error why is this all const? why can't I e.g. postprocess values? OTOH, I need a way to disable this somehow for mmaped data -- Track<const V> vs Track<V>?
         /**
          * @brief Keyframe access
          *
@@ -477,6 +477,7 @@ template<class K> class TrackViewStorage {
 
         Containers::StridedArrayView<const K> _keys;
         Containers::StridedArrayView<const char> _values;
+#error why is this all const? why can't I e.g. postprocess values? OTOH, I need a way to disable this somehow for mmaped data -- Track<const V> vs Track<V>?
         void(*_interpolator)(void);
         Interpolation _interpolation;
         Extrapolation _before, _after;
