@@ -50,23 +50,15 @@ std::string AbstractFont::pluginInterface() {
 std::vector<std::string> AbstractFont::pluginSearchPaths() {
     return {
         #ifdef CORRADE_IS_DEBUG_BUILD
-        #if defined(CORRADE_TARGET_WINDOWS) && !defined(MAGNUM_BUILD_STATIC)
-        Utility::Directory::join(Utility::Directory::path(Utility::Directory::dllLocation(
-            #ifdef __MINGW32__
-            "lib"
-            #endif
-            "MagnumText-d")), "magnum-d/fonts"),
+        #ifndef MAGNUM_BUILD_STATIC
+        Utility::Directory::join(Utility::Directory::path(Utility::Directory::libraryLocation(&pluginInterface)), "magnum-d/fonts"),
         #else
         "magnum-d/fonts",
         #endif
         Utility::Directory::join(MAGNUM_PLUGINS_DEBUG_DIR, "fonts")
         #else
-        #if defined(CORRADE_TARGET_WINDOWS) && !defined(MAGNUM_BUILD_STATIC)
-        Utility::Directory::join(Utility::Directory::path(Utility::Directory::dllLocation(
-            #ifdef __MINGW32__
-            "lib"
-            #endif
-            "MagnumText")), "magnum/fonts"),
+        #ifndef MAGNUM_BUILD_STATIC
+        Utility::Directory::join(Utility::Directory::path(Utility::Directory::libraryLocation(&pluginInterface)), "magnum/fonts"),
         #else
         "magnum/fonts",
         #endif

@@ -59,12 +59,8 @@ std::string AbstractImporter::pluginInterface() {
 std::vector<std::string> AbstractImporter::pluginSearchPaths() {
     return {
         #ifdef CORRADE_IS_DEBUG_BUILD
-        #if defined(CORRADE_TARGET_WINDOWS) && !defined(MAGNUM_BUILD_STATIC)
-        Utility::Directory::join(Utility::Directory::path(Utility::Directory::dllLocation(
-            #ifdef __MINGW32__
-            "lib"
-            #endif
-            "MagnumTrade-d")), "magnum-d/importers"),
+        #ifndef MAGNUM_BUILD_STATIC
+        Utility::Directory::join(Utility::Directory::path(Utility::Directory::libraryLocation(&pluginInterface)), "magnum-d/importers"),
         #else
         "magnum-d/importers",
         #endif
@@ -72,12 +68,8 @@ std::vector<std::string> AbstractImporter::pluginSearchPaths() {
         #ifdef CORRADE_TARGET_WINDOWS
         #endif
         #else
-        #if defined(CORRADE_TARGET_WINDOWS) && !defined(MAGNUM_BUILD_STATIC)
-        Utility::Directory::join(Utility::Directory::path(Utility::Directory::dllLocation(
-            #ifdef __MINGW32__
-            "lib"
-            #endif
-            "MagnumTrade")), "magnum/importers"),
+        #ifndef MAGNUM_BUILD_STATIC
+        Utility::Directory::join(Utility::Directory::path(Utility::Directory::libraryLocation(&pluginInterface)), "magnum/importers"),
         #else
         "magnum/importers",
         #endif
