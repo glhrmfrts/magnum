@@ -3,7 +3,7 @@ set PATH=%PATH:C:\Program Files\Git\usr\bin;=%
 set PATH=C:\mingw-w64\x86_64-7.2.0-posix-seh-rt_v5-rev1\mingw64\bin;%APPVEYOR_BUILD_FOLDER%/openal/bin/Win64;%APPVEYOR_BUILD_FOLDER%\deps\bin;%PATH%
 
 rem Build Corrade
-git clone --depth 1 git://github.com/mosra/corrade.git || exit /b
+git clone --depth 1 --branch next git://github.com/mosra/corrade.git || exit /b
 cd corrade || exit /b
 mkdir build && cd build || exit /b
 cmake .. ^
