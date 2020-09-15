@@ -797,6 +797,11 @@ class MAGNUM_GL_EXPORT AbstractShaderProgram: public AbstractObject {
         void draw(Mesh& mesh);
 
         /**
+         * @brief Draw mesh with an offset
+         */
+        void draw(Mesh& mesh, GLintptr indexOffset);
+
+        /**
          * @overload
          * @m_since{2020,06}
          */

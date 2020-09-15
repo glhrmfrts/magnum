@@ -372,6 +372,40 @@ void AbstractShaderProgram::draw(Mesh& mesh) {
     #endif
 }
 
+void AbstractShaderProgram::draw(Mesh& mesh) {
+    CORRADE_ASSERT(mesh._countSet, "GL::AbstractShaderProgram::draw(): Mesh::setCount() was never called, probably a mistake?", );
+
+    /* Nothing to draw, exit without touching any state */
+    if(!mesh._count || !mesh._instanceCount) return;
+
+    use();
+
+    #ifndef MAGNUM_TARGET_GLES
+    mesh.drawInternal(mesh._count, mesh._baseVertex, mesh._instanceCount, mesh._baseInstance, mesh._indexOffset, mesh._indexStart, mesh._indexEnd);
+    #elif !defined(MAGNUM_TARGET_GLES2)
+    mesh.drawInternal(mesh._count, mesh._baseVertex, mesh._instanceCount, mesh._indexOffset, mesh._indexStart, mesh._indexEnd);
+    #else
+    mesh.drawInternal(mesh._count, mesh._baseVertex, mesh._instanceCount, mesh._indexOffset);
+    #endif
+}
+
+void AbstractShaderProgram::draw(Mesh& mesh, GLintptr indexOffset) {
+    CORRADE_ASSERT(mesh._countSet, "GL::AbstractShaderProgram::draw(): Mesh::setCount() was never called, probably a mistake?", );
+
+    /* Nothing to draw, exit without touching any state */
+    if(!mesh._count || !mesh._instanceCount) return;
+
+    use();
+
+    #ifndef MAGNUM_TARGET_GLES
+    mesh.drawInternal(mesh._count, mesh._baseVertex, mesh._instanceCount, mesh._baseInstance, indexOffset, mesh._indexStart, mesh._indexEnd);
+    #elif !defined(MAGNUM_TARGET_GLES2)
+    mesh.drawInternal(mesh._count, mesh._baseVertex, mesh._instanceCount, mesh._indexOffset, mesh._indexStart, mesh._indexEnd);
+    #else
+    mesh.drawInternal(mesh._count, mesh._baseVertex, mesh._instanceCount, mesh._indexOffset);
+    #endif
+}
+
 void AbstractShaderProgram::draw(MeshView& mesh) {
     CORRADE_ASSERT(mesh._countSet, "GL::AbstractShaderProgram::draw(): MeshView::setCount() was never called, probably a mistake?", );
 
